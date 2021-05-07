@@ -1,0 +1,37 @@
+﻿@model Cansu.Northwind.MVCWebUI.Models.ProductListViewModel
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<div>
+    <table class="table table-responsive" style="width:100%">
+        <colgroup>
+            <col span="1" style="width: 60%;">
+            <col span="1" style="width: 15%;">
+            <col span="1" style="width: 25%;">
+        </colgroup>
+        <tr>
+            <td>Product Name</td>
+            <td>Unit Price</td>
+            <td>Units In Stock</td>
+            <td></td>
+        </tr>
+        @foreach (var product in Model.Products)
+        {
+            <tr>
+                <td>@product.ProductName</td>
+                <td>@product.UnitPrice</td>
+                <td>@product.UnitsInStock</td>
+                <td><a class="btn btn-xs btn-success" asp-controller="Cart" asp-action="AddToCart" asp-route-productId="@product.ProductId">add to cart</a></td>
+            </tr>
+        }
+    </table>
+</div>
+<product-list-pager current-category="@Model.CurrentCategory"
+                    current-page="@Model.CurrentPage"
+                    page-count="@Model.PageCount"
+                    page-size="@Model.PageSize"></product-list-pager>
